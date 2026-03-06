@@ -50,7 +50,21 @@ const server = http.createServer((req,resp)=>{
             req.on('end',()=>{
                 let rawData = Buffer.concat(dataBody).toString();
                 let readableData = queryString.parse(rawData)
-                console.log(readableData)
+
+                let dataString = `My name is ${readableData.Name} and pasword is ${readableData.Password}`;
+
+                console.log(dataString)
+
+                // fs.writeFileSync("Text/"+readableData.Name+" ".txt,dataString);
+                // console.log('file created')
+
+                fs.writeFile("Text/aman.txt",dataString,"utf-8",(err)=>{
+                    if(err){
+                        console.log(err)
+                    }else{
+                        console.log('ban gaya')
+                    }
+                })
             })
 
             resp.write("<h1>Form submitted successfully......</h1>")
